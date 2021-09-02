@@ -48,7 +48,8 @@ def AEstrela(inicio, final, quantidadeDeVertex):
 vertices = [[0, 1, 15], [0, 2, 10], [0, 3, 5], [1, 2, 20], [1, 4, 15], [2, 3, 20], [2, 4, 10],
             [3, 4, 5]]
 numeroDeNos = 5
-grafo = Grafo(numeroDeNos, vertices, [[0, 5], [1, 3], [2, 2.5], [3, 3], [4, 0]])
+heuristica = [[0, 5], [1, 3], [2, 2.5], [3, 3], [4, 0]]
+grafo = Grafo(numeroDeNos, vertices, heuristica)
 noInicial = 0
 objetivo = 4
 
