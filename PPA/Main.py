@@ -1,5 +1,5 @@
 import numpy as np
-
+import random
 from PPA.Grafo import Grafo, GrafoCidades
 
 
@@ -50,15 +50,20 @@ vertices = [[0, 1, 15], [0, 2, 10], [0, 3, 5], [1, 2, 20], [1, 4, 15], [2, 3, 20
 numeroDeNos = 5
 heuristica = [[0, 5], [1, 3], [2, 2.5], [3, 3], [4, 0]]
 grafo = Grafo(numeroDeNos, vertices, heuristica)
-noInicial = 0
 objetivo = 4
-
-
-print(AEstrela(noInicial, objetivo,numeroDeNos))
+nos = [0,1,2,3]
+for i in range (10):
+    noInicial = random.choice(nos)
+    print(f'No inicial: {noInicial}, no Final {objetivo}')
+    print(f'Caminho: {AEstrela(noInicial, objetivo,numeroDeNos)}')
 
 grafo = GrafoCidades()
-inicio = grafo.nomeParaIndex('Lugoj')
+cidades = list(filter(lambda nome: nome!= 'Bucarest', grafo.nomes))
 final = grafo.nomeParaIndex('Bucarest')
 quantidadeDeVertex = grafo.quantidadeDeVertex()
-caminhoIndex = AEstrela(inicio, final, quantidadeDeVertex)
-print(grafo.caminhoIndexToNome(caminhoIndex))
+for i in range(10):
+    cidadeAleatoria = random.choice(cidades)
+    inicio = grafo.nomeParaIndex(cidadeAleatoria)
+    print(f'Cidade inicial: {cidadeAleatoria}, cidade final: Bucarest')
+    caminhoIndex = AEstrela(inicio, final, quantidadeDeVertex)
+    print(f'Caminho: {grafo.caminhoIndexToNome(caminhoIndex)}')
