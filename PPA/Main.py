@@ -2,6 +2,8 @@ import numpy as np
 import random
 from PPA.Grafo import Grafo, GrafoCidades
 
+infinito = 999999
+
 
 def reconstruct_path(cameFrom, current):
     total_path = []
@@ -17,20 +19,20 @@ def reconstruct_path(cameFrom, current):
 
 def AEstrela(inicio, final, quantidadeDeVertex):
     caminho = {}
-    openList = []
-    pontuacaoG = (np.ones(quantidadeDeVertex) * 999999)
+    NosAVisitar = []
+    pontuacaoG = (np.ones(quantidadeDeVertex) * infinito)
     pontuacaoG[inicio] = 0
-    pontuacaoF = (np.ones(quantidadeDeVertex) * 999999)
+    pontuacaoF = (np.ones(quantidadeDeVertex) * infinito)
     pontuacaoF[inicio] = 0
     winer = inicio
     while True:
         atual = winer
-        openList.append(atual)
+        NosAVisitar.append(atual)
         if atual == final:
             caminhoCompleto = reconstruct_path(caminho, atual)
             return caminhoCompleto
-        openList.remove(atual)
-        custoF = 9999999
+        NosAVisitar.remove(atual)
+        custoF = infinito
         for vizinho in grafo.vizinhos(atual):
             tentativaValor = grafo.custoG(atual, vizinho)
             if tentativaValor < pontuacaoG[vizinho]:
@@ -41,8 +43,8 @@ def AEstrela(inicio, final, quantidadeDeVertex):
                 if custoF > grafo.custoF(atual, vizinho):
                     winer = vizinho
                     custoF = grafo.custoF(atual, vizinho)
-                    if vizinho not in openList:
-                        openList.append(vizinho)
+                    if vizinho not in NosAVisitar:
+                        NosAVisitar.append(vizinho)
 
 
 vertices = [[0, 1, 15], [0, 2, 10], [0, 3, 5], [1, 2, 20], [1, 4, 15], [2, 3, 20], [2, 4, 10],
